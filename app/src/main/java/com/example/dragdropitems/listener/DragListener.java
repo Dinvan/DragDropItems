@@ -1,5 +1,6 @@
 package com.example.dragdropitems.listener;
 
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,16 +27,20 @@ public class DragListener implements View.OnDragListener {
     @Override
     public boolean onDrag(View v, DragEvent event) {
         int action = event.getAction();
+        View viewSource1 = (View) event.getLocalState();
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED:
                 break;
 
             case DragEvent.ACTION_DRAG_ENTERED:
-                //v.setBackgroundColor(Color.LTGRAY);
+
                 break;
 
             case DragEvent.ACTION_DRAG_EXITED:
-                //v.setBackgroundColor(Color.YELLOW);
+
+                break;
+            case DragEvent.ACTION_DRAG_LOCATION:
+                dropListener.onDragView(Integer.parseInt(((RecyclerView)viewSource1.getParent()).getTag().toString()),Integer.parseInt(target.getTag().toString()));
                 break;
 
             case DragEvent.ACTION_DROP:
@@ -45,7 +50,11 @@ public class DragListener implements View.OnDragListener {
                 int positionTarget = -1;
 
                 View viewSource = (View) event.getLocalState();
-                if (v.getId() == R.id.cardView || v.getId() == R.id.todayDragFrame || v.getId() == R.id.yesterdayDragFrame) {
+                if (v.getId() == R.id.cardView
+                        || v.getId() == R.id.todayDragFrame
+                        || v.getId() == R.id.yesterdayDragFrame
+                        ||v.getId() == R.id.otherDragFrame) {
+
                     RecyclerView source = (RecyclerView) viewSource.getParent();
                     if (source.getId() == target.getId()) {
                         return false;

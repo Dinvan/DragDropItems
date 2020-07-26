@@ -39,13 +39,10 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Cu
     @Override
     public void onBindViewHolder(CustomListViewHolder holder, int position) {
         CustomList customList = mCustomList.get(position);
-
         holder.textName.setText(customList.name);
         holder.textAddress.setText(customList.address);
         holder.textMobile.setText(customList.mobile);
-
         holder.textEstimatedTime.setText("Estimated Time: " + customList.estimatedTime);
-
         holder.cardView.setTag(position);
         holder.cardView.setOnLongClickListener(view -> {
             ClipData data = ClipData.newPlainText("", "");
@@ -70,7 +67,6 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Cu
         this.mCustomList = customList;
     }
 
-
     public class CustomListViewHolder extends RecyclerView.ViewHolder {
         TextView textName;
         TextView textMobile;
@@ -86,6 +82,5 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Cu
             textEstimatedTime = itemView.findViewById(R.id.textEstimatedTime);
             cardView = itemView.findViewById(R.id.cardView);
         }
-
     }
 }
